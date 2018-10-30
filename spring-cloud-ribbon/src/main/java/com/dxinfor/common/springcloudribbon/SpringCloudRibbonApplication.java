@@ -17,6 +17,11 @@ public class SpringCloudRibbonApplication {
         SpringApplication.run(SpringCloudRibbonApplication.class, args);
     }
 
+    /**
+     * {@code @LoadBalanced} 开启负载均衡的功能
+     *
+     * @return
+     */
     @Bean
     @LoadBalanced
     RestTemplate restTemplate() {
