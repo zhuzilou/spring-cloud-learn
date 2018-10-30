@@ -3,6 +3,7 @@ server:
 
 spring:
   application:
+  # 服务与服务之间相互调用一般都是根据这个name
     name: service-provider
 
 eureka:
@@ -10,7 +11,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
   instance:
-  # \u7528\u4E8E\u5728\u7BA1\u7406\u9875\u9762\u4E0A\u663E\u793AIP\u5730\u5740\uFF0C\u800C\u975E\u673A\u5668\u540D\u3002spring-cloud 2.0\u7248\u672C\u4F7F\u7528spring.cloud.client.ip-address
+  # 用于在管理页面上显示IP地址，而非机器名。spring-cloud 2.0版本使用spring.cloud.client.ip-address
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     prefer-ip-address: true
     hostname: ${spring.cloud.client.ip-address}
