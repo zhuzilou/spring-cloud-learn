@@ -2,5 +2,31 @@
 [源文链接--作者方志朋](https://blog.csdn.net/forezp/article/details/70148833/)
 基于Spring Boot 2.0.5.RELEASE, Spring Cloud Finchley.RELEASE
 
-## [服务注册中心](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-cloud-server)
+## [服务注册中心 Eureka Server](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-cloud-server)
 
+## [服务提供者 Eureka Client](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-cloud-service-provider)
+
+## 服务消费者
+在微服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯是基于http restful的。Spring Cloud有两种服务调用方式，
+一种是Ribbon + restTemplate，另一种是Feign。
+### [Ribbon方式](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-cloud-ribbon)
+
+### [Feign方式](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-cloud-feign)
+
+![Ribbon方式系统图，Feign类似](https://github.com/zhuzilou/spring-cloud-learn/blob/master/doc/Ribbon%E7%89%88%E7%B3%BB%E7%BB%9F%E5%9B%BE.png)
+
+## 断路器（Hystrix）
+当对特定的服务的调用的不可用达到一个阀值（Hystrix是5秒20次）断路器将会被打开，断路器打开后，可用避免连锁故障，fallback
+方法可以直接返回一个固定值。
+
+### Ribbon
+1. 在启动类上添加@EnableHystrix注解开启Hystrix。
+2. 在Service中消费服务提供者提供的接口方法上，添加@HystrixCommand注解，并指定fallbackMethod熔断方法。当此接口提供的服务不可
+用时，会执行快速失败，而不是等待响应超时，这很好的控制了容器的线程阻塞。[Example](https://github.com/zhuzilou/spring-cloud-learn/blob/master/spring-cloud-ribbon/src/main/java/com/dxinfor/common/springcloudribbon/service/HelloService.java)
+
+### Feign
+1. Feign是自带断路器的，在配置文件中添加feign.hystrix.enabled=true打开。
+2. 在Feign接口类中，添加fallback到@FeignClient注解中，指定对应的实现类，实现类中的同名方法即为失败后执行的方法。[Example](https://github.com/zhuzilou/spring-cloud-learn/blob/master/spring-cloud-feign/src/main/java/com/dxinfor/common/springcloudfeign/service/ScheduleServiceHiHystrix.java)
+
+## 路由网关（zuul） 
+[Example](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-cloud-zuul)
