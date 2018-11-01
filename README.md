@@ -1,6 +1,13 @@
 # spring-cloud
+*****************************************************************************
 [源文链接--作者方志朋](https://blog.csdn.net/forezp/article/details/70148833/)
-基于Spring Boot 2.0.5.RELEASE, Spring Cloud Finchley.RELEASE
+
+项目基于Spring Boot 2.0.5.RELEASE，Spring Cloud Finchley.RELEASE，项目包含：
+* spring-cloud-server(服务注册中心)
+* spring-cloud-service-provider(服务提供者)
+* spring-cloud-ribbon(服务消费者Ribbon方式)
+* spring-cloud-feign(服务消费者Feign方式)
+* spring-cloud-zuul(服务路由和过滤)
 
 ## [服务注册中心 Eureka Server](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-cloud-server)
 
@@ -30,3 +37,6 @@
 
 ## 路由网关（zuul） 
 [Example](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-cloud-zuul)
+[简单的微服务系统图](https://github.com/zhuzilou/spring-cloud-learn/blob/master/doc/%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%B3%BB%E7%BB%9F%E5%9B%BE.png)
+
+*****************************************************************************
