@@ -1,0 +1,13 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: first-cloud-invoker
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+    hostname: ${spring.cloud.client.ip-address}
+  client:
+    service-url:
+      defaultZone: http://slave1:8761/eureka/,http://slave2:8762/eureka/

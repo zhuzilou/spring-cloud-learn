@@ -1,0 +1,4 @@
+spring:
+  cloud:
+    config:
+      uri: http://slave1:8761/eureka/,http://slave2:8762/eureka/
