@@ -37,7 +37,8 @@
 ## 路由网关（zuul） 
 [Example](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-cloud-zuul)
 
-[简单的微服务系统图](https://github.com/zhuzilou/spring-cloud-learn/blob/master/doc/%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%B3%BB%E7%BB%9F%E5%9B%BE.png)
+简单的微服务系统图
+![简单的微服务系统图](https://github.com/zhuzilou/spring-cloud-learn/blob/master/doc/%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%B3%BB%E7%BB%9F%E5%9B%BE.png)
 
 # Part2: 疯狂Spring Cloud
 参考《疯狂Spring Cloud微服务架构实战》
@@ -61,8 +62,10 @@
 
 ### 服务注册中心打开自我保护机制
 ![服务注册中心](https://github.com/zhuzilou/spring-cloud-learn/blob/master/first-cloud-server/src/main/resources/2.%20%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83-%E6%89%93%E5%BC%80%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6.png)
+#### 测试结果
 ![测试结果](https://github.com/zhuzilou/spring-cloud-learn/blob/master/first-cloud-server/src/main/resources/2.%20%E8%B0%83%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%BB%93%E6%9E%9C-%E9%83%A8%E5%88%86%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85%E5%BC%82%E5%B8%B8.png)
 ### 服务注册中心关闭自我保护机制
 ![服务注册中心](https://github.com/zhuzilou/spring-cloud-learn/blob/master/first-cloud-server/src/main/resources/1.%20%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83-%E5%85%B3%E9%97%AD%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6.png)
+#### 测试结果
 ![测试结果](https://github.com/zhuzilou/spring-cloud-learn/blob/master/first-cloud-server/src/main/resources/1.%20%E8%B0%83%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%BB%93%E6%9E%9C-%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85%E6%AD%A3%E5%B8%B8.png)
 ### [什么是DS Replicas](https://blog.csdn.net/u012817635/article/details/80189579)
