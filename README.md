@@ -100,3 +100,6 @@
 服务器端清理注册表定时器，默认60秒
 * eureka.server.enable-self-preservation
 若服务器打开自我保护模式，则客户端实例不会被清理。
+### 客户端获取注册表间隔
+eureka.client.registry-fetch-interval-seconds
+默认情况下，客户端每隔30秒去服务器端抓取注册表（可用服务列表），并将服务器端的注册表保存到本地缓存中。

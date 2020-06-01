@@ -16,3 +16,5 @@ eureka:
     service-url:
       defaultZone: http://192.168.1.136:8761/eureka/
     instance-info-replication-interval-seconds: 10
+    # 从服务器端获取注册表（可用服务列表）
+    registry-fetch-interval-seconds: 30
