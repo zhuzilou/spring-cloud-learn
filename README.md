@@ -59,7 +59,6 @@
 >通过启动后输入不同端口启动两个服务提供者，启动成功后在服务注册中心的Status中可以查看多个实例。
 * first-cloud-invoker 服务调用者 http://localhost:9000
 >启动后创建Test模拟多次调用http://localhost:9000 ，查看返回结果发现会分别调用8081和8082服务。
-
 ### 服务注册中心打开自我保护机制
 ![服务注册中心](https://github.com/zhuzilou/spring-cloud-learn/blob/master/first-cloud-server/src/main/resources/2.%20%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83-%E6%89%93%E5%BC%80%E8%87%AA%E6%88%91%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6.png)
 #### 测试结果
@@ -69,3 +68,25 @@
 #### 测试结果
 ![测试结果](https://github.com/zhuzilou/spring-cloud-learn/blob/master/first-cloud-server/src/main/resources/1.%20%E8%B0%83%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%BB%93%E6%9E%9C-%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85%E6%AD%A3%E5%B8%B8.png)
 ### [什么是DS Replicas](https://blog.csdn.net/u012817635/article/details/80189579)
+
+## 健康检查
+* health-handler-server 服务中心
+* health-handler-provider 服务提供者
+* health-handler-invoker 服务调用者
+### 默认健康检查入口
+添加spring-boot-starter-actuator依赖后，[访问页面](http://localhost:8762/actuator/health)，注意与1.5.3地址不同。
+### 自定义健康检查-服务提供者
+1. [MyHealthIndicator](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-provider/src/main/java/cc/lostyouth/springcloud/healthhandlerprovider/config/MyHealthIndicator.java)
+实现org.springframework.boot.actuate.health.HealthIndicator.health()，自定义判断返回up或down。
+2. [MyHealthCheckHandler](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-provider/src/main/java/cc/lostyouth/springcloud/healthhandlerprovider/config/MyHealthCheckHandler.java)
+重写com.netflix.appinfo.HealthCheckHandler.getStatus()，通过判断MyHealthIndicator.health结果，
+返回InstanceInfo.InstanceStatus.UP或DOWN告诉服务器当前健康状态。
+3. 配置文件中添加instance-info-replication-interval-seconds设置检查时间，默认30秒。
+#### 健康检查
+![服务器健康检查失败](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-provider/src/main/resources/%E6%9C%8D%E5%8A%A1%E5%99%A8down.png)
+![每10秒检查一次](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-provider/src/main/resources/%E6%AF%8F10%E7%A7%92%E6%A3%80%E6%9F%A5%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81.png)
+### 获取服务状态-服务调用者
+注入org.springframework.cloud.client.discovery.DiscoveryClient，通过getServices()获取服务列表ID，通过getInstances(id)获取服务实例。
+服务实例包含状态、服务名等信息。
+![服务器状态信息](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-invoker/src/main/resources/%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF.png)
+
