@@ -44,7 +44,7 @@
 参考《疯狂Spring Cloud微服务架构实战》
 
 ## 简单配置
-* spring-cloud-server 服务中心
+* first-ek--server 服务中心
 * first-ek-service-provider 服务提供者
 * first-ek-service-invoker 服务调用者
 
