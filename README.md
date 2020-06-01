@@ -76,11 +76,42 @@
 ### 默认健康检查入口
 添加spring-boot-starter-actuator依赖后，[访问页面](http://localhost:8762/actuator/health)，注意与1.5.3地址不同。
 ### 自定义健康检查-服务提供者
-1. [MyHealthIndicator](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-provider/src/main/java/cc/lostyouth/springcloud/healthhandlerprovider/config/MyHealthIndicator.java)
-实现org.springframework.boot.actuate.health.HealthIndicator.health()，自定义判断返回up或down。
-2. [MyHealthCheckHandler](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-provider/src/main/java/cc/lostyouth/springcloud/healthhandlerprovider/config/MyHealthCheckHandler.java)
-重写com.netflix.appinfo.HealthCheckHandler.getStatus()，通过判断MyHealthIndicator.health结果，
-返回InstanceInfo.InstanceStatus.UP或DOWN告诉服务器当前健康状态。
+1. 实现org.springframework.boot.actuate.health.HealthIndicator.health()，自定义判断返回up或down。
+```java
+@Component
+public class MyHealthIndicator implements HealthIndicator {
+    @Override
+    public Health health() {
+        //HealthController.canVisitDb自定义判断方法
+        if(HealthController.canVisitDb){
+            return Health.up().build();
+        } else {
+            return Health.down().build();
+        }
+    }
+}
+```
+2. 重写com.netflix.appinfo.HealthCheckHandler.getStatus()，通过判断MyHealthIndicator.health结果，返回InstanceInfo.InstanceStatus.UP或DOWN告诉服务器当前健康状态。
+```java
+@Slf4j
+@Component
+public class MyHealthCheckHandler implements HealthCheckHandler {
+    @Autowired
+    private MyHealthIndicator indicator;
+
+    @Override
+    public InstanceInfo.InstanceStatus getStatus(InstanceInfo.InstanceStatus instanceStatus) {
+        Status s = indicator.getHealth(true).getStatus();
+        if (s.equals(Status.UP)) {
+            log.info("数据库正常连接");
+            return InstanceInfo.InstanceStatus.UP;
+        } else {
+            log.error("数据库无法连接");
+            return InstanceInfo.InstanceStatus.DOWN;
+        }
+    }
+}
+```
 3. 配置文件中添加instance-info-replication-interval-seconds设置检查时间，默认30秒。
 #### 健康检查
 ![服务器健康检查失败](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-provider/src/main/resources/%E6%9C%8D%E5%8A%A1%E5%99%A8down.png)
