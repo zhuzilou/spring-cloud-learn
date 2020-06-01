@@ -1,0 +1,13 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: health-handler-invoker
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+    hostname: ${spring.cloud.client.ip-address}
+  client:
+    service-url:
+      defaultZone: http://192.168.1.136:8761/eureka/
