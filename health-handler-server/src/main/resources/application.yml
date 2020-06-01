@@ -14,7 +14,8 @@ eureka:
   server:
     # 关闭注册中心的自我保护机制，防止已关闭的实例无法从注册中心剔除，服务关闭后up依然显示，开发环境下建议关闭。
     enable-self-preservation: false
-
+    # 定时清理表实例，单位应该是毫秒（猜测……）
+    eviction-interval-timer-in-ms: 60000
 spring:
   application:
     name: eurka-server

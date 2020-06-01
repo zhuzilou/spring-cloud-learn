@@ -90,3 +90,13 @@
 服务实例包含状态、服务名等信息。
 ![服务器状态信息](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-invoker/src/main/resources/%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF.png)
 
+## Eureka常用配置
+### 心跳检测
+* eureka.instance.lease-renewal-interval-in-seconds
+客户端实例向服务器发送周期性的心跳，默认30秒发送一次
+* eureka.instance.lease-expiration-duration-in-seconds
+服务器接收心跳请求期限，默认90秒，一定期限内未收到客户端实例的心跳，该实例将从注册表中清理掉。
+* eureka.server.eviction-interval-timer-in-ms
+服务器端清理注册表定时器，默认60秒
+* eureka.server.enable-self-preservation
+若服务器打开自我保护模式，则客户端实例不会被清理。
