@@ -41,12 +41,18 @@ public class InvokeController {
         return result;
     }
 
+    @RequestMapping(value = "/metadata", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, String> getMetaData() {
+        List<ServiceInstance> ins = discoveryClient.getInstances("health-handler-provider");
+        return ins.iterator().next().getMetadata();
+    }
+
     /**
      * 查询可用服务
      *
      * @return
      */
-    public List<ServiceInstance> getServiceInstances() {
+    private List<ServiceInstance> getServiceInstances() {
         List<String> ids = discoveryClient.getServices();
         List<ServiceInstance> result = new ArrayList<>();
         for (String id : ids) {
