@@ -86,9 +86,9 @@
 ![服务器健康检查失败](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-provider/src/main/resources/%E6%9C%8D%E5%8A%A1%E5%99%A8down.png)
 ![每10秒检查一次](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-provider/src/main/resources/%E6%AF%8F10%E7%A7%92%E6%A3%80%E6%9F%A5%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81.png)
 ### 获取服务状态-服务调用者
-注入org.springframework.cloud.client.discovery.DiscoveryClient，通过getServices()获取服务列表ID，通过getInstances(id)获取服务实例。
+* 注入org.springframework.cloud.client.discovery.DiscoveryClient，通过getServices()获取服务列表ID，通过getInstances(id)获取服务实例。
 服务实例包含状态、服务名等信息。
-![服务器状态信息](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-invoker/src/main/resources/%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF.png)
+* ![服务器状态信息](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-invoker/src/main/resources/%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF.png)
 
 ## Eureka常用配置
 ### 心跳检测
@@ -103,3 +103,26 @@
 ### 客户端获取注册表间隔
 eureka.client.registry-fetch-interval-seconds
 默认情况下，客户端每隔30秒去服务器端抓取注册表（可用服务列表），并将服务器端的注册表保存到本地缓存中。
+### 配置与使用元数据
+eureka.instance.metadata-map
+自定义属性指定元数据，可提供给其他客户端使用，元数据会保存在服务器的注册表中。
+通过DiscoveryClient.getInstances(服务名)获取实例列表，实例.getMetadata()获取参数集合。
+#### provider中配置元数据，invoker中获取元数据
+* 配置元数据：
+```yaml
+eureka:
+    instance:
+    # 自定义元数据
+      metadata-map:
+        company-name: lostyouth
+```
+* 获取元数据：
+```java
+@RequestMapping(value = "/metadata", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+public Map<String, String> getMetaData() {
+    List<ServiceInstance> ins = discoveryClient.getInstances("health-handler-provider");
+    return ins.iterator().next().getMetadata();
+}
+```
+![获取元数据](https://github.com/zhuzilou/spring-cloud-learn/blob/master/health-handler-invoker/src/main/resources/%E8%8E%B7%E5%8F%96%E5%85%83%E6%95%B0%E6%8D%AE.png)
+
