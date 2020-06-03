@@ -59,3 +59,11 @@
 * health-handler-invoker 服务调用者
 
 ## 2.3.2 [Eureka常用配置](https://github.com/zhuzilou/spring-cloud-learn/tree/master/health-handler-server#232-eureka%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE)
+
+## 2.4 Ribbon
+### 2.4.1 [负载调用的简单实现](https://github.com/zhuzilou/spring-cloud-learn/tree/master/first-ribbon-client)
+常规项目通过配置服务器端，借助Ribbon实现负载调用。
+### 2.4.2 Spring cloud使用Ribbon
+使用@LoadBalanced修饰RestTemplate实现，简单到难以想像。
+#### 2.4.2.1 [模拟@LoadBalanced](https://github.com/zhuzilou/spring-cloud-learn/tree/master/rest-template-test)
+自定义注解拦截URI请求，了解@LoadBalanced工作流程。
