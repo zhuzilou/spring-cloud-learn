@@ -67,3 +67,6 @@
 使用@LoadBalanced修饰RestTemplate实现，简单到难以想像。
 #### 2.4.2.1 [模拟@LoadBalanced](https://github.com/zhuzilou/spring-cloud-learn/tree/master/rest-template-test)
 自定义注解拦截URI请求，了解@LoadBalanced工作流程。
+
+## 2.5 [Spring cloud使用Ribbon](https://github.com/zhuzilou/spring-cloud-learn/tree/master/spring-feign-invoker)
+Feign主要用于客户端，默认自带负载均衡功能。通过自定义接口绑定需要访问的服务端（接口版Controller），便于在客户端的Controller中注入并调用服务。
