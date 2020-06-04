@@ -1,3 +1,8 @@
+# 写在最前面
+学习技术不求其解，用一时爽一时，出问题时才发现天真与现实的差距。希望这次可以学以致用，加深效果。  
+* 有学习时间但没有应用环境，是件郁闷的事。Part1已经是2018年10月的记录了，当时激情四射，真正需要应用时已经是2020年5月了，不知道是该可悲还是可叹。
+* 没有学习时间但有应用环境，XX挤一挤总会有的。
+
 # Part1: spring-cloud
 [源文链接--作者方志朋](https://blog.csdn.net/forezp/article/details/70148833/)
 
@@ -65,7 +70,7 @@
 management.endpoints.web.base-path=/
 management.endpoints.web.path-mapping.health=healthcheck
 ```
-> 自定义Controller转发，不确定生产环境下是否影响健康检查
+> 自定义Controller转发，不确定生产环境下是否影响健康检查。[参考](https://www.cnblogs.com/lu51211314/p/10482099.html)
 ```java
 @RestController
 public class HealthController {
