@@ -57,6 +57,30 @@
 * health-handler-server 服务中心
 * health-handler-provider 服务提供者
 * health-handler-invoker 服务调用者
+* 参考资料中的spring-boot-starter-actuator入口为/health，spring-boot使用2.2.5.RELEASE版本后，路径变为/actuator/health。
+### 学以致用-20200604
+* 由于某种需要修改路径/actuator/health->/health
+> [修改配置文件](https://docs.spring.io/spring-boot/docs/2.3.0.RELEASE/reference/html/production-ready-features.html#production-ready-customizing-management-server-context-path)，这样可能导致/actuator无法访问
+```
+management.endpoints.web.base-path=/
+management.endpoints.web.path-mapping.health=healthcheck
+```
+> 自定义Controller转发，不确定生产环境下是否影响健康检查
+```java
+@RestController
+public class HealthController {
+
+    @RequestMapping("/health")
+    public void health(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.getRequestDispatcher("actuator/health").forward(request, response);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+}
+```
+
 
 ## 2.3.2 [Eureka常用配置](https://github.com/zhuzilou/spring-cloud-learn/tree/master/health-handler-server#232-eureka%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE)
 
