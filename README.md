@@ -47,7 +47,8 @@
 
 # Part2: 疯狂Spring Cloud
 参考《疯狂Spring Cloud微服务架构实战》
-
+* spring-boot.version: 2.3.0.RELEASE
+* spring-cloud.version: Hoxton.SR5
 ## 2.1 简单配置
 * first-ek--server 服务中心
 * first-ek-service-provider 服务提供者
